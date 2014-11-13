@@ -1,0 +1,88 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/stylesheets/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+.symbols-tree-view {
+  width: 200px;
+  padding: 4px;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.symbols-icon-base {
+  width: 13px;
+  height: 12px;
+  display: inline-block;
+  content: '';
+  background-position: center center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.symbols-tree-view .icon-function::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-function.svg);
+}
+
+.symbols-tree-view .icon-class::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-class.svg);
+}
+
+.symbols-tree-view .icon-namespace::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-namespace.svg);
+}
+
+.symbols-tree-view .icon-struct::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-struct.svg);
+}
+
+.symbols-tree-view .icon-variable::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-variable.svg);
+}
+
+.symbols-tree-view .icon-method::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-function.svg);
+}
+
+.symbols-tree-view .icon-field::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-variable.svg);
+}
+
+.symbols-tree-view .icon-member::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-variable.svg);
+}
+
+.symbols-tree-view .icon-interface::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-interface.svg);
+}
+
+.symbols-tree-view .icon-enum::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-enum.svg);
+}
+
+.symbols-tree-view .icon-typedef::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-typedef.svg);
+}
+
+.symbols-tree-view .icon-macro::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-macro.svg);
+}
+
+.symbols-tree-view .icon-union::before {
+  .symbols-icon-base;
+  background-image: url(atom://symbols-tree-view/icons/icon-union.svg);
+}

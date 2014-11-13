@@ -1,0 +1,18 @@
+{
+  "name": "symbols-tree",
+  "main": "./lib/main",
+  "version": "0.1.0",
+  "description": "A symbols view like taglist",
+  "activationCommands": {
+    "atom-workspace": "symbols-tree-view:toggle"
+  },
+  "repository": "https://github.com/xndcn/symbols-tree-view",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "event-kit": "latest",
+    "q": "~1.0.1"
+  }
+}

@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle Symbols-Tree'
+      'command': 'symbols-tree:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Symbols-Tree'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'symbols-tree-view:toggle'
+        }
+      ]
+    ]
+  }
+]
