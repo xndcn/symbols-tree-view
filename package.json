@@ -1,7 +1,7 @@
 {
   "name": "symbols-tree",
   "main": "./lib/main",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A symbols view like taglist",
   "activationCommands": {
     "atom-workspace": "symbols-tree-view:toggle"
