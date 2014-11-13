@@ -42,7 +42,7 @@ module.exports =
 
         if i >= 1
           pre = parentTags[i-1]
-          {type, name} = @splitParentTag(pre)
+          {type, parent: name} = @splitParentTag(pre)
           if now.search(name) >= 0
             parents[now].parent = pre
             parents[now].name = @splitNameTag(parents[now].name)
