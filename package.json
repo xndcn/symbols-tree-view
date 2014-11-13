@@ -1,5 +1,5 @@
 {
-  "name": "symbols-tree",
+  "name": "symbols-tree-view",
   "main": "./lib/main",
   "version": "0.2.1",
   "description": "A symbols view like taglist",
