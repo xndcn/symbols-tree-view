@@ -7,7 +7,7 @@ TagParser = require './tag-parser'
 module.exports =
   class SymbolsTreeView extends View
     @content: ->
-      @div class: 'symbols-tree-view'
+      @div class: 'symbols-tree-view tool-panel panel-right focusable-panel'
 
     initialize: ->
       @treeView = new TreeView
