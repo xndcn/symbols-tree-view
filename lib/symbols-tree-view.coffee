@@ -26,9 +26,12 @@ module.exports =
     getScopeName: -> atom.workspace.getActiveEditor()?.getGrammar()?.scopeName
 
     populate: ->
-      if editor = @getEditor()
+      unless editor = @getEditor()
+        @hide()
+      else
         filePath = editor.getPath()
         @generateTags(filePath)
+        @show()
 
         editor.onDidSave (state) =>
           @generateTags(filePath)
