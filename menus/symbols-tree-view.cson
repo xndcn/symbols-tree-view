@@ -8,15 +8,9 @@
   ]
 'menu': [
   {
-    'label': 'Packages'
+    'label': 'View'
     'submenu': [
-      'label': 'Symbols-Tree-View'
-      'submenu': [
-        {
-          'label': 'Toggle'
-          'command': 'symbols-tree-view:toggle'
-        }
-      ]
+      {'label': 'Toggle Symbols-Tree-View', 'command': 'symbols-tree-view:toggle'}
     ]
   }
 ]
