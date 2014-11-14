@@ -2,15 +2,15 @@
 'context-menu':
   'atom-text-editor': [
     {
-      'label': 'Toggle Symbols-Tree'
-      'command': 'symbols-tree:toggle'
+      'label': 'Toggle Symbols-Tree-View'
+      'command': 'symbols-tree-view:toggle'
     }
   ]
 'menu': [
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'Symbols-Tree'
+      'label': 'Symbols-Tree-View'
       'submenu': [
         {
           'label': 'Toggle'
