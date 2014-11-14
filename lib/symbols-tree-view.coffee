@@ -13,18 +13,16 @@ module.exports =
       @treeView = new TreeView
       @append(@treeView)
 
-      atom.workspace.onDidChangeActivePaneItem (editor) =>
-        @populate()
-
       @treeView.onSelect ({node, item}) =>
         if item.position.row >= 0 and editor = atom.workspace.getActiveEditor()
           editor.scrollToBufferPosition(item.position, center: true)
           editor.setCursorBufferPosition(item.position)
           editor.moveCursorToFirstCharacterOfLine()
 
-      atom.config.observe 'tree-view.showOnRightSide', (value) =>
+      @onChangeSide = atom.config.observe 'tree-view.showOnRightSide', (value) =>
         if @hasParent()
-          @detach()
+          @remove()
+          @populate()
           @attach()
 
     getEditor: -> atom.workspace.getActiveEditor()
@@ -38,10 +36,10 @@ module.exports =
         @generateTags(filePath)
         @show()
 
-        editor.onDidSave (state) =>
+        @onEditorSave = editor.onDidSave (state) =>
           @generateTags(filePath)
 
-        editor.onDidChangeCursorPosition ({oldBufferPosition, newBufferPosition}) =>
+        @onChangeRow = editor.onDidChangeCursorPosition ({oldBufferPosition, newBufferPosition}) =>
           if oldBufferPosition.row != newBufferPosition.row
             @focusCurrentCursorTag()
 
@@ -66,6 +64,10 @@ module.exports =
       @element.remove()
 
     attach: ->
+      @onEditorChange = atom.workspace.onDidChangeActivePaneItem (editor) =>
+        @removeEventForEditor()
+        @populate()
+
       if atom.config.get('tree-view.showOnRightSide')
         @removeClass('panel-right')
         @addClass('panel-left')
@@ -74,6 +76,15 @@ module.exports =
         @removeClass('panel-left')
         @addClass('panel-right')
         atom.workspaceView.appendToRight(this)
+
+    removeEventForEditor: ->
+      @onEditorSave.dispose() if @onEditorSave
+      @onChangeRow.dispose() if @onChangeRow
+
+    remove: ->
+      super
+      @onEditorChange.dispose() if @onEditorChange
+      @removeEventForEditor()
 
     # Toggle the visibility of this view
     toggle: ->
