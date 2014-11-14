@@ -3,9 +3,6 @@
   "main": "./lib/main",
   "version": "0.2.3",
   "description": "A symbols view like taglist",
-  "activationCommands": {
-    "atom-workspace": "symbols-tree-view:toggle"
-  },
   "repository": "https://github.com/xndcn/symbols-tree-view",
   "license": "MIT",
   "engines": {
