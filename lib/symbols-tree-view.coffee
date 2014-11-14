@@ -7,7 +7,7 @@ TagParser = require './tag-parser'
 module.exports =
   class SymbolsTreeView extends View
     @content: ->
-      @div class: 'symbols-tree-view tool-panel panel-right focusable-panel'
+      @div class: 'symbols-tree-view tool-panel focusable-panel'
 
     initialize: ->
       @treeView = new TreeView
@@ -21,6 +21,11 @@ module.exports =
           editor.scrollToBufferPosition(item.position, center: true)
           editor.setCursorBufferPosition(item.position)
           editor.moveCursorToFirstCharacterOfLine()
+
+      atom.config.observe 'tree-view.showOnRightSide', (value) =>
+        if @hasParent()
+          @detach()
+          @attach()
 
     getEditor: -> atom.workspace.getActiveEditor()
     getScopeName: -> atom.workspace.getActiveEditor()?.getGrammar()?.scopeName
@@ -60,10 +65,20 @@ module.exports =
     destroy: ->
       @element.remove()
 
+    attach: ->
+      if atom.config.get('tree-view.showOnRightSide')
+        @removeClass('panel-right')
+        @addClass('panel-left')
+        atom.workspaceView.appendToLeft(this)
+      else
+        @removeClass('panel-left')
+        @addClass('panel-right')
+        atom.workspaceView.appendToRight(this)
+
     # Toggle the visibility of this view
     toggle: ->
       if @hasParent()
         @remove()
       else
         @populate()
-        atom.workspaceView.appendToRight(this)
+        @attach()
