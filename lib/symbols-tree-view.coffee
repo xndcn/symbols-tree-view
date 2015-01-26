@@ -1,5 +1,5 @@
-{Point, View} = require 'atom'
-
+{Point} = require 'atom'
+{View} = require 'atom-space-pen-views'
 {TreeView} = require './tree-view'
 TagGenerator = require './tag-generator'
 TagParser = require './tag-parser'
@@ -14,10 +14,10 @@ module.exports =
       @append(@treeView)
 
       @treeView.onSelect ({node, item}) =>
-        if item.position.row >= 0 and editor = atom.workspace.getActiveEditor()
+        if item.position.row >= 0 and editor = atom.workspace.getActiveTextEditor()
           editor.scrollToBufferPosition(item.position, center: true)
           editor.setCursorBufferPosition(item.position)
-          editor.moveCursorToFirstCharacterOfLine()
+          editor.moveToFirstCharacterOfLine()
 
       @onChangeSide = atom.config.observe 'tree-view.showOnRightSide', (value) =>
         if @hasParent()
@@ -25,8 +25,8 @@ module.exports =
           @populate()
           @attach()
 
-    getEditor: -> atom.workspace.getActiveEditor()
-    getScopeName: -> atom.workspace.getActiveEditor()?.getGrammar()?.scopeName
+    getEditor: -> atom.workspace.getActiveTextEditor()
+    getScopeName: -> atom.workspace.getActiveTextEditor()?.getGrammar()?.scopeName
 
     populate: ->
       unless editor = @getEditor()
@@ -69,13 +69,9 @@ module.exports =
         @populate()
 
       if atom.config.get('tree-view.showOnRightSide')
-        @removeClass('panel-right')
-        @addClass('panel-left')
-        atom.workspaceView.appendToLeft(this)
+        @panel = atom.workspace.addLeftPanel(item: this)
       else
-        @removeClass('panel-left')
-        @addClass('panel-right')
-        atom.workspaceView.appendToRight(this)
+        @panel = atom.workspace.addRightPanel(item: this)
 
     removeEventForEditor: ->
       @onEditorSave.dispose() if @onEditorSave
@@ -85,6 +81,7 @@ module.exports =
       super
       @onEditorChange.dispose() if @onEditorChange
       @removeEventForEditor()
+      @panel.destroy()
 
     # Toggle the visibility of this view
     toggle: ->

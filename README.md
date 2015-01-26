@@ -1,6 +1,6 @@
 # symbols-tree-view package
 
-Symbols Tree View for Atom.io, just like taglist for VIM.
+Symbols Tree View for Atom.io, just like taglist or tagbar for VIM.
 
 tag-generator.coffee comes from http://github.com/atom/symbols-view
 

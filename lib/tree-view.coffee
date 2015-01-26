@@ -1,4 +1,4 @@
-{$, $$, View, ScrollView} = require 'atom'
+{$, $$, View, ScrollView} = require 'atom-space-pen-views'
 {Emitter} = require 'event-kit'
 
 module.exports =
