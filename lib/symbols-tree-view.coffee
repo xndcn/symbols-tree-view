@@ -1,5 +1,5 @@
-{Point} = require 'atom'
-{View} = require 'atom-space-pen-views'
+{Point, Range} = require 'atom'
+{jQuery, View} = require 'atom-space-pen-views'
 {TreeView} = require './tree-view'
 TagGenerator = require './tag-generator'
 TagParser = require './tag-parser'
@@ -15,9 +15,29 @@ module.exports =
 
       @treeView.onSelect ({node, item}) =>
         if item.position.row >= 0 and editor = atom.workspace.getActiveTextEditor()
-          editor.scrollToBufferPosition(item.position, center: true)
-          editor.setCursorBufferPosition(item.position)
-          editor.moveToFirstCharacterOfLine()
+          screenPosition = editor.screenPositionForBufferPosition(item.position)
+          screenRange = new Range(screenPosition, screenPosition)
+          {top, left, height, width} = editor.pixelRectForScreenRange(screenRange)
+          bottom = top + height
+          desiredScrollCenter = top + height / 2
+          unless editor.getScrollTop() < desiredScrollCenter < editor.getScrollBottom()
+            desiredScrollTop =  desiredScrollCenter - editor.getHeight() / 2
+
+          from = {top: editor.getScrollTop()}
+          to = {top: desiredScrollTop}
+
+          step = (now) ->
+            editor.setScrollTop(now)
+
+          done = ->
+            editor.scrollToBufferPosition(item.position, center: true)
+            editor.setCursorBufferPosition(item.position)
+            editor.moveToFirstCharacterOfLine()
+
+          if atom.config.get("symbols-tree-view.scrollAnimation")
+            jQuery(from).animate(to, speed: "fast", step: step, done: done)
+          else
+            done()
 
       @onChangeSide = atom.config.observe 'tree-view.showOnRightSide', (value) =>
         if @hasParent()

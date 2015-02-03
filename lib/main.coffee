@@ -3,6 +3,7 @@ SymbolsTreeView = require './symbols-tree-view'
 module.exports =
   configDefaults:
     autoToggle: false
+    scrollAnimation: true
 
   symbolsTreeView: null
 
