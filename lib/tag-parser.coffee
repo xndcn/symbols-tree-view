@@ -7,7 +7,8 @@ module.exports =
       @grammar = grammar
 
       #splitSymbol = '::' for c/c++, and '.' for others.
-      if @grammar == 'source.c++' or @grammar == 'source.c'
+      if @grammar == 'source.c++' or @grammar == 'source.c' or
+         @grammar == 'source.cpp'
         @splitSymbol = '::'
       else
         @splitSymbol = '.'
