@@ -4,7 +4,7 @@ Symbols Tree View for Atom.io, just like taglist or tagbar for VIM.
 
 tag-generator.coffee comes from http://github.com/atom/symbols-view
 
-![screenshot](https://raw.githubusercontent.com/xndcn/symbols-tree-view/master/screenshot.png?raw=true)
+![screencast](https://raw.githubusercontent.com/xndcn/symbols-tree-view/master/screencast.gif?raw=true)
 
 
 ## TO DO
