@@ -35,7 +35,7 @@ module.exports =
             editor.moveToFirstCharacterOfLine()
 
           if atom.config.get("symbols-tree-view.scrollAnimation")
-            jQuery(from).animate(to, speed: "fast", step: step, done: done)
+            jQuery(from).animate(to, duration: 300, step: step, done: done)
           else
             done()
 
