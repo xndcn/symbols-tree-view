@@ -34,16 +34,16 @@ module.exports =
             editor.setCursorBufferPosition(item.position)
             editor.moveToFirstCharacterOfLine()
 
-          if atom.config.get("symbols-tree-view.scrollAnimation")
-            jQuery(from).animate(to, duration: 300, step: step, done: done)
-          else
-            done()
+          jQuery(from).animate(to, duration: @animationDuration, step: step, done: done)
 
       @onChangeSide = atom.config.observe 'tree-view.showOnRightSide', (value) =>
         if @hasParent()
           @remove()
           @populate()
           @attach()
+
+      @onChangeAnimation = atom.config.observe 'symbols-tree-view.scrollAnimation', (enabled) =>
+        @animationDuration = enabled ? 300 : 0
 
       @onChangeAutoHide = atom.config.observe 'symbols-tree-view.autoHide', (autoHide) =>
         minimalWidth = 5
@@ -56,13 +56,13 @@ module.exports =
           @width(minimalWidth)
 
           @mouseenter (event) =>
-            @animate({width: originalWidth}, duration: 300)
+            @animate({width: originalWidth}, duration: @animationDuration)
 
           @mouseleave (event) =>
             if atom.config.get('tree-view.showOnRightSide')
-              @animate({width: minimalWidth}, duration: 300) if event.offsetX > 0
+              @animate({width: minimalWidth}, duration: @animationDuration) if event.offsetX > 0
             else
-              @animate({width: minimalWidth}, duration: 300) if event.offsetX <= 0
+              @animate({width: minimalWidth}, duration: @animationDuration) if event.offsetX <= 0
 
     getEditor: -> atom.workspace.getActiveTextEditor()
     getScopeName: -> atom.workspace.getActiveTextEditor()?.getGrammar()?.scopeName
