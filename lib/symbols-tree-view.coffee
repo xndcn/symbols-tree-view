@@ -1,5 +1,5 @@
 {Point, Range} = require 'atom'
-{jQuery, View} = require 'atom-space-pen-views'
+{$, jQuery, View} = require 'atom-space-pen-views'
 {TreeView} = require './tree-view'
 TagGenerator = require './tag-generator'
 TagParser = require './tag-parser'
@@ -44,6 +44,25 @@ module.exports =
           @remove()
           @populate()
           @attach()
+
+      @onChangeAutoHide = atom.config.observe 'symbols-tree-view.autoHide', (autoHide) =>
+        minimalWidth = 5
+        originalWidth = 200
+
+        unless autoHide
+          @width(originalWidth)
+          @off('mouseenter mouseleave')
+        else
+          @width(minimalWidth)
+
+          @mouseenter (event) =>
+            @animate({width: originalWidth}, duration: 300)
+
+          @mouseleave (event) =>
+            if atom.config.get('tree-view.showOnRightSide')
+              @animate({width: minimalWidth}, duration: 300) if event.offsetX > 0
+            else
+              @animate({width: minimalWidth}, duration: 300) if event.offsetX <= 0
 
     getEditor: -> atom.workspace.getActiveTextEditor()
     getScopeName: -> atom.workspace.getActiveTextEditor()?.getGrammar()?.scopeName

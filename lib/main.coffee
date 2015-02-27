@@ -10,6 +10,10 @@ module.exports =
       type: 'boolean'
       default: true
       description: 'If this option is enabled then when you click the item in symbols-tree it will scroll to the destination gradually.'
+    autoHide:
+      type: 'boolean'
+      default: false
+      description: 'If this option is enabled then symbols-tree-view is always hided unless mouse hover over it.'
 
   symbolsTreeView: null
 

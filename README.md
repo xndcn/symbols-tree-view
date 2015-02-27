@@ -8,6 +8,8 @@ tag-generator.coffee comes from http://github.com/atom/symbols-view
 
 ## Settings
 
+* `Auto Hide` If checked then symbols-tree-view is always hided unless mouse hover over it. (default=false)
+
 * `Auto Toggle` If checked the symbols-tree-view is auto toggled on when you open files. (default=false)
 
 * `Scroll Animation` If checked it will scroll to the destination gradually when you click the item in symbols-tree. (default=true)
