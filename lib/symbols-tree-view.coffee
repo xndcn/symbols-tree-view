@@ -76,6 +76,7 @@ module.exports =
         @show()
 
         @onEditorSave = editor.onDidSave (state) =>
+          filePath = editor.getPath()
           @generateTags(filePath)
 
         @onChangeRow = editor.onDidChangeCursorPosition ({oldBufferPosition, newBufferPosition}) =>
