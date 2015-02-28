@@ -68,7 +68,7 @@ module.exports =
 
       stdout = (lines) =>
         for line in lines.split('\n')
-          if tag = @parseTagLine(line)
+          if tag = @parseTagLine(line.trim())
             tags.push(tag)
       exit = ->
         deferred.resolve(tags)
