@@ -24,34 +24,35 @@ module.exports =
     getLanguage: ->
       return 'Cson' if path.extname(@path) in ['.cson', '.gyp']
 
-      switch @scopeName
-        when 'source.c'        then 'C'
-        when 'source.cpp'      then 'C++'
-        when 'source.clojure'  then 'Lisp'
-        when 'source.coffee'   then 'CoffeeScript'
-        when 'source.css'      then 'Css'
-        when 'source.css.less' then 'Css'
-        when 'source.css.scss' then 'Css'
-        when 'source.gfm'      then 'Markdown'
-        when 'source.go'       then 'Go'
-        when 'source.java'     then 'Java'
-        when 'source.js'       then 'JavaScript'
-        when 'source.js.jsx'   then 'JavaScript'
-        when 'source.jsx'      then 'JavaScript'
-        when 'source.json'     then 'Json'
-        when 'source.makefile' then 'Make'
-        when 'source.objc'     then 'C'
-        when 'source.objcpp'   then 'C++'
-        when 'source.python'   then 'Python'
-        when 'source.ruby'     then 'Ruby'
-        when 'source.sass'     then 'Sass'
-        when 'source.yaml'     then 'Yaml'
-        when 'text.html'       then 'Html'
-        when 'text.html.php'   then 'Php'
+      {
+        'source.c'        : 'C'
+        'source.cpp'      : 'C++'
+        'source.clojure'  : 'Lisp'
+        'source.coffee'   : 'CoffeeScript'
+        'source.css'      : 'Css'
+        'source.css.less' : 'Css'
+        'source.css.scss' : 'Css'
+        'source.gfm'      : 'Markdown'
+        'source.go'       : 'Go'
+        'source.java'     : 'Java'
+        'source.js'       : 'JavaScript'
+        'source.js.jsx'   : 'JavaScript'
+        'source.jsx'      : 'JavaScript'
+        'source.json'     : 'Json'
+        'source.makefile' : 'Make'
+        'source.objc'     : 'C'
+        'source.objcpp'   : 'C++'
+        'source.python'   : 'Python'
+        'source.ruby'     : 'Ruby'
+        'source.sass'     : 'Sass'
+        'source.yaml'     : 'Yaml'
+        'text.html'       : 'Html'
+        'text.html.php'   : 'Php'
 
         # For backward-compatibility with Atom versions < 0.166
-        when 'source.c++'      then 'C++'
-        when 'source.objc++'   then 'C++'
+        'source.c++'      : 'C++'
+        'source.objc++'   : 'C++'
+      }[@scopeName]
 
     generate: ->
       deferred = Q.defer()
