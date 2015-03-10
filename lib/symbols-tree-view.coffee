@@ -43,11 +43,11 @@ module.exports =
           @attach()
 
       @onChangeAnimation = atom.config.observe 'symbols-tree-view.scrollAnimation', (enabled) =>
-        @animationDuration = enabled ? 300 : 0
+        @animationDuration = enabled ? 90 : 0
 
       @onChangeAutoHide = atom.config.observe 'symbols-tree-view.autoHide', (autoHide) =>
-        minimalWidth = 5
-        originalWidth = 200
+        minimalWidth = 9
+        originalWidth = 225
 
         unless autoHide
           @width(originalWidth)
