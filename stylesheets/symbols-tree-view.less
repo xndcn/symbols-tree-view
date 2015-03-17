@@ -4,6 +4,13 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
+@font-face {
+  font-family: 'symbol-icons';
+  src: url('atom://symbols-tree-view/icons/symbol-icons.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .symbols-tree-view {
   width: 200px;
   height: 100%;
@@ -13,77 +20,70 @@
   overflow-x: hidden;
 }
 
-.symbols-icon-base {
-  width: 13px;
-  height: 12px;
-  display: inline-block;
-  content: '';
-  background-position: center center;
-  background-size: 100%;
-  background-repeat: no-repeat;
+@symbol-class:    '\e600';
+@symbol-struct:   '\e601';
+@symbol-macro:    '\e602';
+@symbol-typedef:  '\e603';
+@symbol-union:    '\e604';
+@symbol-interface:'\e605';
+@symbol-enum:     '\e606';
+@symbol-variable: '\e607';
+@symbol-function: '\e608';
+@symbol-namespace:'\e609';
+
+.symbol-icon(@name) {
+  font-family: 'symbol-icons';
+  content: @@name;
 }
 
 .symbols-tree-view .icon-function::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-function.svg);
+  .symbol-icon(symbol-function);
 }
 
 .symbols-tree-view .icon-class::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-class.svg);
+  .symbol-icon(symbol-class);
 }
 
 .symbols-tree-view .icon-namespace::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-namespace.svg);
+  .symbol-icon(symbol-namespace);
 }
 
 .symbols-tree-view .icon-struct::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-struct.svg);
+  .symbol-icon(symbol-struct);
 }
 
 .symbols-tree-view .icon-variable::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-variable.svg);
+  .symbol-icon(symbol-variable);
 }
 
 .symbols-tree-view .icon-method::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-function.svg);
+  .symbol-icon(symbol-function);
 }
 
 .symbols-tree-view .icon-field::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-variable.svg);
+  .symbol-icon(symbol-variable);
 }
 
 .symbols-tree-view .icon-member::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-variable.svg);
+  .symbol-icon(symbol-variable);
 }
 
 .symbols-tree-view .icon-interface::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-interface.svg);
+  .symbol-icon(symbol-interface);
 }
 
 .symbols-tree-view .icon-enum::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-enum.svg);
+  .symbol-icon(symbol-enum);
 }
 
 .symbols-tree-view .icon-typedef::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-typedef.svg);
+  .symbol-icon(symbol-typedef);
 }
 
 .symbols-tree-view .icon-macro::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-macro.svg);
+  .symbol-icon(symbol-macro);
 }
 
 .symbols-tree-view .icon-union::before {
-  .symbols-icon-base;
-  background-image: url(atom://symbols-tree-view/icons/icon-union.svg);
+  .symbol-icon(symbol-union);
 }

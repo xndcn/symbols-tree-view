@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="icon-typedef.svg">
+   sodipodi:docname="icon-macro.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -43,7 +43,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -61,18 +61,14 @@
        sodipodi:linespacing="125%"
        transform="translate(0,924.36218)"><tspan
          sodipodi:role="line"
-         id="tspan3474"></tspan></text>
-    <text
-       xml:space="preserve"
+         id="tspan3474" /></text>
+    <g
        style="font-size:128px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif"
-       x="24.929688"
-       y="1045.7841"
-       id="text3773"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3775"
-         x="24.929688"
-         y="1045.7841"
-         style="font-size:160px;font-style:normal;font-weight:normal;-inkscape-font-specification:DejaVu Serif;fill:#ffffff">#</tspan></text>
+       id="text3773">
+      <path
+         d="m 106.33594,975.39343 -22.031253,0 -6.5625,26.09377 22.265623,0 6.32813,-26.09377 m -11.015628,-44.45312 -7.96875,32.42187 22.031248,0 8.04688,-32.42187 13.4375,0 -8.20313,32.42187 24.0625,0 0,12.03125 -27.10937,0 -6.40625,26.09377 24.53125,0 0,11.9531 -27.5,0 -8.04688,32.3438 -13.437498,0 8.203125,-32.3438 -22.109375,0 -8.125,32.3438 -13.28125,0 7.96875,-32.3438 -24.140625,0 0,-11.9531 27.1875,0 6.40625,-26.09377 -24.6875,0 0,-12.03125 27.734375,0 8.125,-32.42187 13.28125,0"
+         style="font-size:160px;fill:#ffffff;-inkscape-font-specification:DejaVu Serif"
+         id="path2987" />
+    </g>
   </g>
 </svg>
