@@ -54,6 +54,7 @@ module.exports =
           @off('mouseenter mouseleave')
         else
           @width(minimalWidth)
+          @stop()
 
           @mouseenter (event) =>
             @animate({width: originalWidth}, duration: @animationDuration)
