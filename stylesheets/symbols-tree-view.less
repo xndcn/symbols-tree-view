@@ -20,6 +20,28 @@
   overflow-x: hidden;
 }
 
+.symbols-context-menu {
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  .hidden-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: none;
+  }
+  .select-list.popover-list {
+    width: 100%;
+    min-width: 100%;
+    ol {
+      margin-top: 0;
+      li:hover {
+        background: @background-color-highlight;
+      }
+    }
+  }
+}
+
 @symbol-class:    '\e600';
 @symbol-struct:   '\e601';
 @symbol-macro:    '\e602';

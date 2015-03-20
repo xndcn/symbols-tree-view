@@ -77,11 +77,11 @@ module.exports =
       @emitter.on 'on-select', callback
 
     setRoot: (root, ignoreRoot=true) ->
-      rootNode = new TreeNode(root)
+      @rootNode = new TreeNode(root)
 
-      rootNode.onDblClick ({node, item}) =>
+      @rootNode.onDblClick ({node, item}) =>
         node.setCollapsed()
-      rootNode.onSelect ({node, item}) =>
+      @rootNode.onSelect ({node, item}) =>
         @clearSelect()
         node.setSelected()
         @emitter.emit 'on-select', {node, item}
@@ -93,7 +93,18 @@ module.exports =
             for child in root.children
               @subview 'child', child.view
           else
-            @subview 'root', rootNode
+            @subview 'root', @rootNode
+
+    traversal: (root, doing) =>
+      doing(root.item)
+      if root.item.children
+        for child in root.item.children
+          @traversal(child.view, doing)
+
+    toggleTypeVisible: (type) =>
+      @traversal @rootNode, (item) =>
+        if item.type == type
+          item.view.toggle()
 
     clearSelect: ->
       $('.list-selectable-item').removeClass('selected')

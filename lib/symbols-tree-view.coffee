@@ -3,6 +3,7 @@
 {TreeView} = require './tree-view'
 TagGenerator = require './tag-generator'
 TagParser = require './tag-parser'
+SymbolsContextMenu = require './symbols-context-menu'
 
 module.exports =
   class SymbolsTreeView extends View
@@ -12,6 +13,10 @@ module.exports =
     initialize: ->
       @treeView = new TreeView
       @append(@treeView)
+
+      @cachedTypeStatus = {}
+      @nowTypeStatus = {}
+      @contextMenu = new SymbolsContextMenu
 
       @treeView.onSelect ({node, item}) =>
         if item.position.row >= 0 and editor = atom.workspace.getActiveTextEditor()
@@ -37,7 +42,7 @@ module.exports =
           jQuery(from).animate(to, duration: @animationDuration, step: step, done: done)
 
       atom.config.observe 'symbols-tree-view.scrollAnimation', (enabled) =>
-        @animationDuration = enabled ? 300 : 0
+        @animationDuration = if enabled then 300 else 0
 
       @minimalWidth = 5
       @originalWidth = 200
@@ -72,11 +77,30 @@ module.exports =
         tag = @parser.getNearestTag(row)
         @treeView.select(tag)
 
+    updateContextMenu: (types) ->
+      @contextMenu.clear()
+      editor = @getEditor().id
+
+      toggleTypeVisible = (type) =>
+        @treeView.toggleTypeVisible(type)
+        @nowTypeStatus[type] = !@nowTypeStatus[type]
+
+      if @cachedTypeStatus[editor]
+        for type, visible of @cachedTypeStatus[editor]
+          @treeView.toggleTypeVisible(type) unless visible
+      else
+        @cachedTypeStatus[editor] = {}
+        @cachedTypeStatus[editor][type] = true for type in types
+
+      @nowTypeStatus = @cachedTypeStatus[editor]
+      @contextMenu.addMenu(type, @nowTypeStatus[type], toggleTypeVisible) for type in types
+
     generateTags: (filePath) ->
       new TagGenerator(filePath, @getScopeName()).generate().done (tags) =>
         @parser = new TagParser(tags, @getScopeName())
-        root = @parser.parse()
+        {root, types} = @parser.parse()
         @treeView.setRoot(root)
+        @updateContextMenu(types)
         @focusCurrentCursorTag()
 
     # Returns an object that can be retrieved when package is activated
@@ -110,15 +134,23 @@ module.exports =
             else
               @animate({width: @minimalWidth}, duration: @animationDuration) if event.offsetX <= 0
 
+      @on "contextmenu", (event) =>
+        @contextMenu.attach()
+        @contextMenu.css({top: event.pageY, left: event.pageX})
+        return false #disable original atom context menu
+
     removeEventForEditor: ->
       @onEditorSave?.dispose()
       @onChangeRow?.dispose()
 
-    remove: ->
-      super
+    detached: ->
       @onChangeEditor?.dispose()
       @onChangeAutoHide?.dispose()
       @removeEventForEditor()
+      @off "contextmenu"
+
+    remove: ->
+      super
       @panel.destroy()
 
     # Toggle the visibility of this view

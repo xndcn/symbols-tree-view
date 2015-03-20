@@ -51,6 +51,7 @@ module.exports =
     parse: ->
       roots = []
       parents = {}
+      types = {}
 
       # sort tags by row number
       @tags.sort (a, b) =>
@@ -59,6 +60,7 @@ module.exports =
       # try to find out all tags with parent information
       for tag in @tags
         parents[tag.parent] = null if tag.parent
+        types[tag.type] = null
 
       # try to build up relationships between parent information an the real tag
       for tag in @tags
@@ -91,7 +93,7 @@ module.exports =
         else
           roots.push(tag)
 
-      return {label: 'root', icon: null, children: roots}
+      return {root: {label: 'root', icon: null, children: roots}, types: Object.keys(types)}
 
     getNearestTag: (row) ->
       left = 0
