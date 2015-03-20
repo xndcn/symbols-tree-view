@@ -10,7 +10,7 @@ module.exports =
 
     initialize: ->
       @hiddenInput.on 'focusout', =>
-        @detach()
+        @hide()
 
     clear: ->
       @menus.empty()
@@ -26,7 +26,10 @@ module.exports =
 
       @menus.append(menu)
 
-    attach: ->
+    show: ->
       if @menus.children().length > 0
-        atom.views.getView(atom.workspace).appendChild(@element)
+        super
         @hiddenInput.focus()
+
+    attach: ->
+      atom.views.getView(atom.workspace).appendChild(@element)

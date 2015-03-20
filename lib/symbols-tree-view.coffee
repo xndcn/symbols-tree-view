@@ -115,6 +115,8 @@ module.exports =
         @panel = atom.workspace.addLeftPanel(item: this)
       else
         @panel = atom.workspace.addRightPanel(item: this)
+      @contextMenu.attach()
+      @contextMenu.hide()
 
     attached: ->
       @onChangeEditor = atom.workspace.onDidChangeActivePaneItem (editor) =>
@@ -135,11 +137,11 @@ module.exports =
               @animate({width: @minimalWidth}, duration: @animationDuration) if event.offsetX <= 0
 
       @on "contextmenu", (event) =>
-        @contextMenu.attach()
         left = event.pageX
         if left + @contextMenu.width() > atom.getSize().width
           left = left - @contextMenu.width()
         @contextMenu.css({left: left, top: event.pageY})
+        @contextMenu.show()
         return false #disable original atom context menu
 
     removeEventForEditor: ->
