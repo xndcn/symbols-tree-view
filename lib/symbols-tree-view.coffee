@@ -128,9 +128,11 @@ module.exports =
           @off('mouseenter mouseleave')
         else
           @mouseenter (event) =>
+            @stop()
             @animate({width: @originalWidth}, duration: @animationDuration)
 
           @mouseleave (event) =>
+            @stop()
             if atom.config.get('tree-view.showOnRightSide')
               @animate({width: @minimalWidth}, duration: @animationDuration) if event.offsetX > 0
             else
