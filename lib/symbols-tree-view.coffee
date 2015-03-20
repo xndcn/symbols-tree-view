@@ -136,7 +136,10 @@ module.exports =
 
       @on "contextmenu", (event) =>
         @contextMenu.attach()
-        @contextMenu.css({top: event.pageY, left: event.pageX})
+        left = event.pageX
+        if left + @contextMenu.width() > atom.getSize().width
+          left = left - @contextMenu.width()
+        @contextMenu.css({left: left, top: event.pageY})
         return false #disable original atom context menu
 
     removeEventForEditor: ->
