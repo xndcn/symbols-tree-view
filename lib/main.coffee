@@ -21,6 +21,12 @@ module.exports =
     @symbolsTreeView = new SymbolsTreeView(state.symbolsTreeViewState)
     atom.commands.add 'atom-workspace', 'symbols-tree-view:toggle': => @symbolsTreeView.toggle()
 
+    atom.config.observe 'tree-view.showOnRightSide', (value) =>
+      if @symbolsTreeView.hasParent()
+        @symbolsTreeView.remove()
+        @symbolsTreeView.populate()
+        @symbolsTreeView.attach()
+
     atom.config.observe "symbols-tree-view.autoToggle", (enabled) =>
       if enabled
         @symbolsTreeView.toggle() unless @symbolsTreeView.hasParent()

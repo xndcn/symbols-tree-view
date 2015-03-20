@@ -36,33 +36,16 @@ module.exports =
 
           jQuery(from).animate(to, duration: @animationDuration, step: step, done: done)
 
-      @onChangeSide = atom.config.observe 'tree-view.showOnRightSide', (value) =>
-        if @hasParent()
-          @remove()
-          @populate()
-          @attach()
-
-      @onChangeAnimation = atom.config.observe 'symbols-tree-view.scrollAnimation', (enabled) =>
+      atom.config.observe 'symbols-tree-view.scrollAnimation', (enabled) =>
         @animationDuration = enabled ? 300 : 0
 
-      @onChangeAutoHide = atom.config.observe 'symbols-tree-view.autoHide', (autoHide) =>
-        minimalWidth = 5
-        originalWidth = 200
-
+      @minimalWidth = 5
+      @originalWidth = 200
+      atom.config.observe 'symbols-tree-view.autoHide', (autoHide) =>
         unless autoHide
-          @width(originalWidth)
-          @off('mouseenter mouseleave')
+          @width(@originalWidth)
         else
-          @width(minimalWidth)
-
-          @mouseenter (event) =>
-            @animate({width: originalWidth}, duration: @animationDuration)
-
-          @mouseleave (event) =>
-            if atom.config.get('tree-view.showOnRightSide')
-              @animate({width: minimalWidth}, duration: @animationDuration) if event.offsetX > 0
-            else
-              @animate({width: minimalWidth}, duration: @animationDuration) if event.offsetX <= 0
+          @width(@minimalWidth)
 
     getEditor: -> atom.workspace.getActiveTextEditor()
     getScopeName: -> atom.workspace.getActiveTextEditor()?.getGrammar()?.scopeName
@@ -104,22 +87,37 @@ module.exports =
       @element.remove()
 
     attach: ->
-      @onEditorChange = atom.workspace.onDidChangeActivePaneItem (editor) =>
-        @removeEventForEditor()
-        @populate()
-
       if atom.config.get('tree-view.showOnRightSide')
         @panel = atom.workspace.addLeftPanel(item: this)
       else
         @panel = atom.workspace.addRightPanel(item: this)
 
+    attached: ->
+      @onChangeEditor = atom.workspace.onDidChangeActivePaneItem (editor) =>
+        @removeEventForEditor()
+        @populate()
+
+      @onChangeAutoHide = atom.config.observe 'symbols-tree-view.autoHide', (autoHide) =>
+        unless autoHide
+          @off('mouseenter mouseleave')
+        else
+          @mouseenter (event) =>
+            @animate({width: @originalWidth}, duration: @animationDuration)
+
+          @mouseleave (event) =>
+            if atom.config.get('tree-view.showOnRightSide')
+              @animate({width: @minimalWidth}, duration: @animationDuration) if event.offsetX > 0
+            else
+              @animate({width: @minimalWidth}, duration: @animationDuration) if event.offsetX <= 0
+
     removeEventForEditor: ->
-      @onEditorSave.dispose() if @onEditorSave
-      @onChangeRow.dispose() if @onChangeRow
+      @onEditorSave?.dispose()
+      @onChangeRow?.dispose()
 
     remove: ->
       super
-      @onEditorChange.dispose() if @onEditorChange
+      @onChangeEditor?.dispose()
+      @onChangeAutoHide?.dispose()
       @removeEventForEditor()
       @panel.destroy()
 
