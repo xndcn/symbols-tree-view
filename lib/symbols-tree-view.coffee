@@ -79,7 +79,7 @@ module.exports =
 
     updateContextMenu: (types) ->
       @contextMenu.clear()
-      editor = @getEditor().id
+      editor = @getEditor()?.id
 
       toggleTypeVisible = (type) =>
         @treeView.toggleTypeVisible(type)
