@@ -71,9 +71,11 @@ module.exports =
         for line in lines.split('\n')
           if tag = @parseTagLine(line.trim())
             tags.push(tag)
+      stderr = (lines) =>
+        return
       exit = ->
         deferred.resolve(tags)
 
-      new BufferedProcess({command, args, stdout, exit})
+      new BufferedProcess({command, args, stdout, stderr, exit})
 
       deferred.promise
