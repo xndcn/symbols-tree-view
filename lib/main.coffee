@@ -13,7 +13,7 @@ module.exports =
     autoHide:
       type: 'boolean'
       default: false
-      description: 'If this option is enabled then symbols-tree-view is always hided unless mouse hover over it.'
+      description: 'If this option is enabled then symbols-tree-view is always hidden unless mouse hover over it.'
 
   symbolsTreeView: null
 
