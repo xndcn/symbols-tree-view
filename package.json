@@ -12,5 +12,10 @@
     "atom-space-pen-views": "^2.0.0",
     "event-kit": "latest",
     "q": "~1.0.1"
-  }
+  },
+  "keywords": [
+    "taglist",
+    "tagbar",
+    "symbols"
+  ]
 }
