@@ -14,8 +14,7 @@ module.exports =
       @treeView = new TreeView
       @append(@treeView)
 
-      @cachedTypeStatus = {}
-      @nowTypeStatus = {}
+      @cachedStatus = {}
       @contextMenu = new SymbolsContextMenu
 
       @treeView.onSelect ({node, item}) =>
@@ -85,15 +84,27 @@ module.exports =
         @treeView.toggleTypeVisible(type)
         @nowTypeStatus[type] = !@nowTypeStatus[type]
 
-      if @cachedTypeStatus[editor]
-        for type, visible of @cachedTypeStatus[editor]
-          @treeView.toggleTypeVisible(type) unless visible
-      else
-        @cachedTypeStatus[editor] = {}
-        @cachedTypeStatus[editor][type] = true for type in types
+      toggleSortByName = =>
+        @nowSortStatus[0] = !@nowSortStatus[0]
+        if @nowSortStatus[0]
+          @treeView.sortByName()
+        else
+          @treeView.sortByRow()
+        @focusCurrentCursorTag()
 
-      @nowTypeStatus = @cachedTypeStatus[editor]
+      if @cachedStatus[editor]
+        {@nowTypeStatus, @nowSortStatus} = @cachedStatus[editor]
+        for type, visible of @nowTypeStatus
+          @treeView.toggleTypeVisible(type) unless visible
+        @treeView.sortByName() if @nowSortStatus[0]
+      else
+        @cachedStatus[editor] = {nowTypeStatus: {}, nowSortStatus: [false]}
+        @cachedStatus[editor].nowTypeStatus[type] = true for type in types
+        {@nowTypeStatus, @nowSortStatus} = @cachedStatus[editor]
+
       @contextMenu.addMenu(type, @nowTypeStatus[type], toggleTypeVisible) for type in types
+      @contextMenu.addSeparator()
+      @contextMenu.addMenu('sort by name', @nowSortStatus[0], toggleSortByName)
 
     generateTags: (filePath) ->
       new TagGenerator(filePath, @getScopeName()).generate().done (tags) =>

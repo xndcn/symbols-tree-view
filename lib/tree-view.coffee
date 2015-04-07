@@ -106,6 +106,24 @@ module.exports =
         if item.type == type
           item.view.toggle()
 
+    sortByName: (ascending=true) =>
+      @traversal @rootNode, (item) =>
+        item.children?.sort (a, b) =>
+          if ascending
+            return a.name.localeCompare(b.name)
+          else
+            return b.name.localeCompare(a.name)
+      @setRoot(@rootNode.item)
+
+    sortByRow: (ascending=true) =>
+      @traversal @rootNode, (item) =>
+        item.children?.sort (a, b) =>
+          if ascending
+            return a.position.row - b.position.row
+          else
+            return b.position.row - a.position.row
+      @setRoot(@rootNode.item)
+
     clearSelect: ->
       $('.list-selectable-item').removeClass('selected')
 

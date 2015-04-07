@@ -26,6 +26,10 @@ module.exports =
 
       @menus.append(menu)
 
+    addSeparator: ->
+      @menus.append $$ ->
+        @li class: 'separator'
+
     show: ->
       if @menus.children().length > 0
         super
