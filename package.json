@@ -1,7 +1,7 @@
 {
   "name": "symbols-tree-view",
   "main": "./lib/main",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A symbols view like taglist",
   "repository": "https://github.com/xndcn/symbols-tree-view",
   "license": "MIT",
