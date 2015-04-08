@@ -41,6 +41,7 @@ module.exports =
 
       for now, i in parentTags
         {type, parent: name} = @splitParentTag(now)
+
         if parents[now] is null
           parents[now] = {
             name: name,
@@ -48,14 +49,15 @@ module.exports =
             position: null,
             parent: null
           }
+
           @tags.push(parents[now])
 
-        if i >= 1
-          pre = parentTags[i-1]
-          {type, parent: name} = @splitParentTag(pre)
-          if now.indexOf(name) >= 0
-            parents[now].parent = pre
-            parents[now].name = @splitNameTag(parents[now].name)
+          if i >= 1
+            pre = parentTags[i-1]
+            {type, parent: name} = @splitParentTag(pre)
+            if now.indexOf(name) >= 0
+              parents[now].parent = pre
+              parents[now].name = @splitNameTag(parents[now].name)
 
     parse: ->
       roots = []
@@ -70,7 +72,7 @@ module.exports =
       for tag in @tags
         parents[tag.parent] = null if tag.parent
 
-      # try to build up relationships between parent information an the real tag
+      # try to build up relationships between parent information and the real tag
       for tag in @tags
         if tag.parent
           {type, parent} = @splitParentTag(tag.parent)
