@@ -17,6 +17,13 @@ module.exports =
       @cachedStatus = {}
       @contextMenu = new SymbolsContextMenu
 
+      atom.commands.add @element,
+         'core:move-up': @treeView.selectPrev.bind(@treeView)
+         'core:move-down': @treeView.selectNext.bind(@treeView)
+         'core:move-left': @treeView.collapseActiveItem.bind(@treeView)
+         'core:move-right': @treeView.uncollapseActiveItem.bind(@treeView)
+         'tool-panel:unfocus':  @unfocus
+
       @treeView.onSelect ({node, item}) =>
         if item.position.row >= 0 and editor = atom.workspace.getActiveTextEditor()
           screenPosition = editor.screenPositionForBufferPosition(item.position)
@@ -128,6 +135,7 @@ module.exports =
         @panel = atom.workspace.addRightPanel(item: this)
       @contextMenu.attach()
       @contextMenu.hide()
+      @treeView.focus()
 
     attached: ->
       @onChangeEditor = atom.workspace.onDidChangeActivePaneItem (editor) =>
@@ -171,6 +179,9 @@ module.exports =
       super
       @panel.destroy()
 
+    unfocus: ->
+       atom.workspace.getActivePane().activate()
+       
     # Toggle the visibility of this view
     toggle: ->
       if @hasParent()
