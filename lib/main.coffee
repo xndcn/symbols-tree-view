@@ -14,6 +14,11 @@ module.exports =
       type: 'boolean'
       default: false
       description: 'If this option is enabled then symbols-tree-view is always hidden unless mouse hover over it.'
+    autoFocus:
+         type: 'boolean'
+         default: false
+         description: 'If this option is enabled then symbols-tree-view will focus when you open it'
+
 
   symbolsTreeView: null
 

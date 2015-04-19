@@ -135,7 +135,8 @@ module.exports =
         @panel = atom.workspace.addRightPanel(item: this)
       @contextMenu.attach()
       @contextMenu.hide()
-      @treeView.focus()
+      atom.config.observe 'symbols-tree-view.autoFocus', (autoFocus) =>
+         @focus() if autoFocus
 
     attached: ->
       @onChangeEditor = atom.workspace.onDidChangeActivePaneItem (editor) =>
@@ -180,8 +181,11 @@ module.exports =
       @panel.destroy()
 
     unfocus: ->
-       atom.workspace.getActivePane().activate()
-       
+      atom.workspace.getActivePane().activate()
+
+    focus: ->
+      @treeView.focus()
+
     # Toggle the visibility of this view
     toggle: ->
       if @hasParent()
