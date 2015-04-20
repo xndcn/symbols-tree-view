@@ -75,7 +75,7 @@ module.exports =
 
   TreeView: class TreeView extends ScrollView
     @content: ->
-      @div class: '-tree-view-', tabindex:-1, =>
+      @div class: '-tree-view-', =>
         @ul class: 'list-tree has-collapsable-children', outlet: 'root'
 
     initialize: ->

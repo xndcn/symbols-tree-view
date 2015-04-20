@@ -8,7 +8,7 @@ SymbolsContextMenu = require './symbols-context-menu'
 module.exports =
   class SymbolsTreeView extends View
     @content: ->
-      @div class: 'symbols-tree-view tool-panel focusable-panel'
+      @div class: 'symbols-tree-view tool-panel focusable-panel', tabindex:-1
 
     initialize: ->
       @treeView = new TreeView
@@ -182,9 +182,6 @@ module.exports =
 
     unfocus: ->
       atom.workspace.getActivePane().activate()
-
-    focus: ->
-      @treeView.focus()
 
     # Toggle the visibility of this view
     toggle: ->
