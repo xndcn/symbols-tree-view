@@ -93,7 +93,7 @@ module.exports =
             for child in root.children
               @subview 'child', child.view
           else
-            @subview 'root', @rootNode
+            @subview 'root', root.view
 
     traversal: (root, doing) =>
       doing(root.item)

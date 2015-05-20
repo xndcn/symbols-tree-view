@@ -90,6 +90,8 @@ module.exports =
           @treeView.sortByName()
         else
           @treeView.sortByRow()
+        for type, visible of @nowTypeStatus
+          @treeView.toggleTypeVisible(type) unless visible
         @focusCurrentCursorTag()
 
       if @cachedStatus[editor]
