@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 744.09448819 1052.3622047"
+   height="297mm"
+   width="210mm">
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <g
+       id="text4318"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:125px;line-height:125%;font-family:'Berlin Sans FB';-inkscape-font-specification:'Berlin Sans FB';letter-spacing:0px;word-spacing:0px;fill:none;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1">
+      <path
+         id="path4337"
+         style="fill:none"
+         d="m 316.35043,485.43768 -0.061,0.54932 q -0.54932,2.13623 -1.46485,6.28662 -0.1831,2.01416 -0.79345,5.85938 -0.12207,0.54931 -3.47901,0.73242 -2.31933,0.12207 -6.59179,0 -5.49317,-0.12207 -5.12696,-0.12207 -3.78418,0 -11.23047,0.73242 -7.44628,0.67139 -11.16943,0.67139 -1.64795,0 -1.64795,-2.01416 0,-2.80762 3.54004,-11.65772 0.30518,-0.85449 1.70899,-0.85449 2.13623,0 6.28662,0.1831 4.15039,0.12207 6.28662,0.12207 3.72314,0 11.23047,-0.73242 7.50732,-0.79345 11.23047,-0.79345 1.34277,0 1.28173,1.03759 z" />
+      <path
+         id="path4339"
+         style="fill:none"
+         d="m 361.15024,498.25507 q 0,1.46484 -1.40381,2.13623 -15.625,7.62939 -31.25,21.72851 -0.36621,0.42725 -1.34277,0.85449 -4.57764,-7.93457 -4.57764,-8.48388 0,-2.74658 11.84082,-10.86426 10.37598,-7.14111 14.95361,-9.09424 0.67139,-0.24414 1.34278,-0.91553 -0.36621,-0.36621 -1.46485,-0.85449 -17.8833,-7.69043 -26.24511,-18.12744 -0.61036,-0.73242 -0.61036,-1.15967 0,-0.24414 1.77002,-3.54004 1.77002,-3.35693 1.95313,-4.02832 0.24414,-0.67138 0.48828,-0.67138 0.30518,0 1.40381,0.79345 5.18799,4.45557 16.11328,12.75635 6.40869,4.15039 7.56836,4.88281 4.94385,2.99073 7.8125,4.08936 1.64795,0.61035 1.64795,2.13623 l 0,8.36182 z" />
+    </g>
+  </g>
+</svg>
