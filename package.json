@@ -4,6 +4,13 @@
   "version": "0.9.3",
   "description": "A symbols view like taglist",
   "repository": "https://github.com/xndcn/symbols-tree-view",
+  "providedServices": {
+    "hyperclick.provider": {
+      "versions": {
+        "0.0.0": "getProvider"
+      }
+    }
+  },
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"

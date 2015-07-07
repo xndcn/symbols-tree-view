@@ -76,6 +76,14 @@ module.exports =
         tag = @parser.getNearestTag(row)
         @treeView.select(tag)
 
+    focusClickedTag: (editor, text) ->
+      console.log "clicked: #{text}"
+      if editor = @getEditor()
+        tag =  (t for t in @parser.tags when t.name is text)[0]
+        @treeView.select(tag)
+        # imho, its a bad idea =(
+        jQuery('.list-item.list-selectable-item.selected').click()
+
     updateContextMenu: (types) ->
       @contextMenu.clear()
       editor = @getEditor()?.id

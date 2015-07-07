@@ -38,3 +38,13 @@ module.exports =
 
   serialize: ->
     symbolsTreeViewState: @symbolsTreeView.serialize()
+
+  getProvider: ->
+    view = @symbolsTreeView
+    { getSuggestionForWord: (textEditor, text, range) =>
+      {
+        range: range
+        callback: ()=>
+          view.focusClickedTag.bind(view)(textEditor, text)
+      }
+    }
