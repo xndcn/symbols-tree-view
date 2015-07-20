@@ -99,6 +99,7 @@ module.exports =
         if tag.parent
           parent = parents[tag.parent]
           parent.children ?= []
+          tag.parentNode = parent
           parent.children.push(tag)
         else
           roots.push(tag)

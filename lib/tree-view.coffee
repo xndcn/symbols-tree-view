@@ -23,8 +23,17 @@ module.exports =
       @on 'dblclick', @dblClickItem
       @on 'click', @clickItem
 
+    isCollapsed: ->
+      return @hasClass('collapsed')
+
     setCollapsed: ->
       @toggleClass('collapsed') if @item.children
+
+    collapse: ->
+      @addClass('collapsed') if @item.children
+
+    uncollapse:->
+      @removeClass('collapsed')
 
     setSelected: ->
       @addClass('selected')
@@ -56,6 +65,9 @@ module.exports =
       @emitter.emit 'on-select', {node: this, item: @item}
       return false
 
+    selectItem: ->
+      @emitter.emit 'on-select', {node: this, item: @item}
+
     dblClickItem: (event) =>
       @emitter.emit 'on-dbl-click', {node: this, item: @item}
       return false
@@ -77,6 +89,7 @@ module.exports =
       @emitter.on 'on-select', callback
 
     setRoot: (root, ignoreRoot=true) ->
+      @tagList = root
       @rootNode = new TreeNode(root)
 
       @rootNode.onDblClick ({node, item}) =>
@@ -124,9 +137,59 @@ module.exports =
             return b.position.row - a.position.row
       @setRoot(@rootNode.item)
 
+
+    collapseActiveItem: ->
+      @activeItem.view.collapse()
+
+    uncollapseActiveItem: ->
+      @activeItem.view.uncollapse()
+
     clearSelect: ->
       $('.list-selectable-item').removeClass('selected')
+
+    selectNext: ->
+      @selectTag @getNextTag(@activeItem)
+
+
+    selectPrev: ->
+      @selectTag @getPrevTag(@activeItem)
+
+
+    selectTag: (tag)->
+      if tag
+         @select tag
+         tag.view.selectItem()
+
+    getNextTag: (item) ->
+      return if !item
+
+      if item.children and !item.view.isCollapsed()
+         return item.children[0]
+      else
+         while parent = item.parentNode || @tagList
+            ind = parent.children.indexOf(item) + 1
+            if ind < parent.children.length
+               return parent.children[ind]
+            else
+               return if parent.label == 'root'
+               item = parent
+
+    getPrevTag: (item) ->
+       return if !item
+
+       parent = item.parentNode || @tagList
+       ind = parent.children.indexOf(item) - 1
+       if 0 <= ind
+          item = parent.children[ind]
+          while item.children && !item.view.isCollapsed()
+             [..., item] = item.children
+
+          return item
+       else
+          return parent if parent.label != 'root'
 
     select: (item) ->
       @clearSelect()
       item?.view.setSelected()
+      @activeIndex = @tagList.children.indexOf(item)
+      @activeItem = item

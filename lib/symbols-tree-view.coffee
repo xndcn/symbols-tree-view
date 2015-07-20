@@ -8,7 +8,7 @@ SymbolsContextMenu = require './symbols-context-menu'
 module.exports =
   class SymbolsTreeView extends View
     @content: ->
-      @div class: 'symbols-tree-view tool-panel focusable-panel'
+      @div class: 'symbols-tree-view tool-panel focusable-panel', tabindex:-1
 
     initialize: ->
       @treeView = new TreeView
@@ -16,6 +16,13 @@ module.exports =
 
       @cachedStatus = {}
       @contextMenu = new SymbolsContextMenu
+
+      atom.commands.add @element,
+         'core:move-up': @treeView.selectPrev.bind(@treeView)
+         'core:move-down': @treeView.selectNext.bind(@treeView)
+         'core:move-left': @treeView.collapseActiveItem.bind(@treeView)
+         'core:move-right': @treeView.uncollapseActiveItem.bind(@treeView)
+         'tool-panel:unfocus':  @unfocus
 
       @treeView.onSelect ({node, item}) =>
         if item.position.row >= 0 and editor = atom.workspace.getActiveTextEditor()
@@ -138,6 +145,8 @@ module.exports =
         @panel = atom.workspace.addRightPanel(item: this)
       @contextMenu.attach()
       @contextMenu.hide()
+      atom.config.observe 'symbols-tree-view.autoFocus', (autoFocus) =>
+         @focus() if autoFocus
 
     attached: ->
       @onChangeEditor = atom.workspace.onDidChangeActivePaneItem (editor) =>
@@ -180,6 +189,9 @@ module.exports =
     remove: ->
       super
       @panel.destroy()
+
+    unfocus: ->
+      atom.workspace.getActivePane().activate()
 
     # Toggle the visibility of this view
     toggle: ->
