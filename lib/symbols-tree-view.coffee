@@ -188,3 +188,13 @@ module.exports =
       else
         @populate()
         @attach()
+
+    # Show this view if hidden
+    show: ->
+      if not @hasParent()
+        @attach()
+
+    # Hide this view if visible
+    hide: ->
+      if @hasParent()
+        @remove()
