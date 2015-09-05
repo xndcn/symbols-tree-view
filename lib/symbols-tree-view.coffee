@@ -164,9 +164,7 @@ module.exports =
         if left + @contextMenu.width() > atom.getSize().width
           left = left - @contextMenu.width()
         @contextMenu.css({left: left, top: event.pageY})
-        @contextMenu.show()
-        return false #disable original atom context menu
-
+        @contextMenu.show()view reconfiguration
     removeEventForEditor: ->
       @onEditorSave?.dispose()
       @onChangeRow?.dispose()
@@ -188,3 +186,14 @@ module.exports =
       else
         @populate()
         @attach()
+
+    # Show this view if hidden
+    show: ->
+      if not @hasParent()
+        @populate()
+        @attach()
+
+    # Hide this view if visible
+    hide: ->
+      if @hasParent()
+        @remove()
