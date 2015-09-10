@@ -26,6 +26,11 @@ module.exports =
 
       @menus.append(menu)
 
+    toggle: (type) ->
+      for menu in @menus.find('li')
+        if $(menu).text() == type
+          $(menu).toggleClass('active')
+
     addSeparator: ->
       @menus.append $$ ->
         @li class: 'separator'

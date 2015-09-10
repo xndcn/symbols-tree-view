@@ -14,6 +14,13 @@ module.exports =
       type: 'boolean'
       default: false
       description: 'If this option is enabled then symbols-tree-view is always hidden unless mouse hover over it.'
+    zAutoHideTypes:
+      title: 'AutoHideTypes'
+      type: 'string'
+      description: 'Here you can specify a list of types that will be hidden by default (ex: "variable class")'
+      default: ''
+
+
 
   symbolsTreeView: null
 
