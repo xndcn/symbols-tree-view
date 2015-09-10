@@ -27,6 +27,8 @@ module.exports =
   activate: (state) ->
     @symbolsTreeView = new SymbolsTreeView(state.symbolsTreeViewState)
     atom.commands.add 'atom-workspace', 'symbols-tree-view:toggle': => @symbolsTreeView.toggle()
+    atom.commands.add 'atom-workspace', 'symbols-tree-view:show': => @symbolsTreeView.showView()
+    atom.commands.add 'atom-workspace', 'symbols-tree-view:hide': => @symbolsTreeView.hideView()
 
     atom.config.observe 'tree-view.showOnRightSide', (value) =>
       if @symbolsTreeView.hasParent()

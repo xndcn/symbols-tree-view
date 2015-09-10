@@ -196,3 +196,14 @@ module.exports =
       else
         @populate()
         @attach()
+
+    # Show view if hidden
+    showView: ->
+      if not @hasParent()
+        @populate()
+        @attach()
+
+    # Hide view if visisble
+    hideView: ->
+      if @hasParent()
+        @remove()
