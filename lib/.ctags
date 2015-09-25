@@ -116,3 +116,11 @@
 --regex-Rust=/^[ \t]*(pub[ \t]+)?impl([ \t\n]*<[^>]*>)?[ \t]+(([a-zA-Z0-9_:]+)[ \t]*(<[^>]*>)?[ \t]+(for)[ \t]+)?([a-zA-Z0-9_]+)/\4 \6 \7/i,generic/
 --regex-Rust=/^[ \t]*macro_rules![ \t]+([a-zA-Z0-9_]+)/\1/d,macro/
 
+--langdef=LiveCode
+--langmap=LiveCode:.livecodescript
+--langmap=LiveCode:+.lc
+--langmap=LiveCode:+.irev
+--regex-LiveCode=/^[ \t]*(private[ \t]+)*(on|command)[ \t]*([A-Za-z0-9_]+)/\3/h,method/
+--regex-LiveCode=/^[ \t]*(private[ \t]+)*function[ \t]+([A-Za-z0-9_]+)/\2/f,function/
+--regex-LiveCode=/^[ \t]*constant[ \t]+([A-Za-z0-9_]+)/\1/c,constant/
+--regex-LiveCode=/^[ \t]*(global|local)[ \t]+([A-Za-z0-9_]+)/\2/v,variable/
