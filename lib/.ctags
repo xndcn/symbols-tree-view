@@ -76,12 +76,31 @@
 --regex-perl=/^\=head2[ \t]+(.+)/-- \1/p,pod,Plain Old Documentation/
 --regex-perl=/^\=head[3-5][ \t]+(.+)/---- \1/p,pod,Plain Old Documentation/
 
---regex-JavaScript=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]*\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*function[ \t]*\(/\5/,function/
---regex-JavaScript=/function[ \t]+([A-Za-z0-9_$]+)[ \t]*\([^)]*\)/\1/,function/
---regex-JavaScript=/(,|^|\*\/)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*function[ \t]*\(/\2/,function/
---regex-JavaScript=/(,|^|\*\/)[ \t]*(while|if|for|function|([A-Za-z_$][A-Za-z0-9_$]+))[ \t]*\([^)]*\)[ \t]*\{/\3/,function/
---regex-JavaScript=/(,|^|\*\/)[ \t]*get[ \t]+([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*\([ \t]*\)[ \t]*\{/get \2/,function/
---regex-JavaScript=/(,|^|\*\/)[ \t]*set[ \t]+([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*\([ \t]*([A-Za-z_$][A-Za-z0-9_$]+)?[ \t]*\)[ \t]*\{/set \2/,function/
+
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*\{/\5/,object/
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*\[/\5/,array/
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*[^"]'[^']*/\5/,string/
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*(true|false)/\5/,boolean/
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*[0-9]+/\5/,number/
+
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*.+([,;=]|$)/\5/,variable/
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*[ \t]*([,;]|$)/\5/,variable/
+--regex-JavaScript=/(,|(;|^)[ \t]*)const[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*=[ \t]*.+([,;=]|$)/\3/,constant/
+
+--regex-JavaScript=/function[ \t]+([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*\([^)]*\)/\1/,function/
+
+--regex-JavaScript=/(,|^|\*\/)[ \t]*(while|if|for|switch|function|([A-Za-z_$][A-Za-z0-9_$]*))[ \t]*\([^)]*\)[ \t]*\{/\3/,function/
+
+--regex-JavaScript=/(,|^|\*\/|\{)[ \t]*get[ \t]+([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*\([ \t]*\)[ \t]*\{/get \2/,getter/
+--regex-JavaScript=/(,|^|\*\/|\{)[ \t]*set[ \t]+([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*\([ \t]*([A-Za-z_$][A-Za-z0-9_$]*)?[ \t]*\)[ \t]*\{/set \2/,setter/
+
+--regex-JavaScript=/(,|^|\*\/)[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*:[ \t]*\{/\2/,object/
+--regex-JavaScript=/(,|^|\*\/)[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*:[ \t]*\[/\2/,array/
+--regex-JavaScript=/(,|^|\*\/)[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*:[ \t]*[^"]'[^']*/\2/,string/
+--regex-JavaScript=/(,|^|\*\/)[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*:[ \t]*(true|false)/\2/,boolean/
+--regex-JavaScript=/(,|^|\*\/)[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*:[ \t]*[0-9]+/\2/,number/
+--regex-JavaScript=/(,|^|\*\/)[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*:[ \t]*[^=]+([,;]|$)/\2/,variable/
+
 
 --langdef=haxe
 --langmap=haxe:.hx
