@@ -146,13 +146,13 @@
 
 --langdef=sql
 --langmap=sql:.sql
---langmap=sql:.bdy
---langmap=sql:.spc
---langmap=sql:.pls
---langmap=sql:.plb
---langmap=sql:.ddl
---langmap=sql:.pks
---langmap=sql:.pkb
+--langmap=sql:+.bdy
+--langmap=sql:+.spc
+--langmap=sql:+.pls
+--langmap=sql:+.plb
+--langmap=sql:+.ddl
+--langmap=sql:+.pks
+--langmap=sql:+.pkb
 --regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(table)[\t]+([^.]+\.)?([a-zA-Z0-9_@.]+)/\4/t,table/i
 --regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(procedure|package)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/p,procedure/i
 --regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(function)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/f,function/i
