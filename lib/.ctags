@@ -143,3 +143,22 @@
 --regex-LiveCode=/^[ \t]*(private[ \t]+)*function[ \t]+([A-Za-z0-9_]+)/\2/f,function/
 --regex-LiveCode=/^[ \t]*constant[ \t]+([A-Za-z0-9_]+)/\1/c,constant/
 --regex-LiveCode=/^[ \t]*(global|local)[ \t]+([A-Za-z0-9_]+)/\2/v,variable/
+
+--langdef=sql
+--langmap=sql:.sql
+--langmap=sql:.bdy
+--langmap=sql:.spc
+--langmap=sql:.pls
+--langmap=sql:.plb
+--langmap=sql:.ddl
+--langmap=sql:.pks
+--langmap=sql:.pkb
+--regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(table)[\t]+([^.]+\.)?([a-zA-Z0-9_@.]+)/\4/t,table/i
+--regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(procedure|package)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/p,procedure/i
+--regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(function)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/f,function/i
+--regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(trigger)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/r,trigger/i
+--regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(event)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/e,event/i
+--regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(index)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/i,index/i
+--regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9\t]*)?(publication|subscription to|synchronization user)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/m,mobilink/i
+--regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9 \t]*)?(variable)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/v,variable/i
+--regex-sql=/^[ \t]*create[ \t]+([a-zA-Z0-9\t]*)?(rule|schema|server|datatype|database|message)[\t]+([^.]+\.)?"?([a-zA-Z0-9_@.]+)/\4/o,other/I
