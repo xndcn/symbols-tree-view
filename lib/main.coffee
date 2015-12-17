@@ -19,6 +19,10 @@ module.exports =
       type: 'string'
       description: 'Here you can specify a list of types that will be hidden by default (ex: "variable class")'
       default: ''
+    sortByNameScopes:
+      type: 'string'
+      description: 'Here you can specify a list of scopes that will be sorted by name (ex: "text.html.php")'
+      default: ''
 
 
 
