@@ -1,63 +1,49 @@
-SymbolsTreeView = require './symbols-tree-view'
+{CompositeDisposable} = require 'event-kit'
 
 module.exports =
-  config:
-    autoToggle:
-      type: 'boolean'
-      default: false
-      description: 'If this option is enabled then symbols-tree-view will auto open when you open files.'
-    scrollAnimation:
-      type: 'boolean'
-      default: true
-      description: 'If this option is enabled then when you click the item in symbols-tree it will scroll to the destination gradually.'
-    autoHide:
-      type: 'boolean'
-      default: false
-      description: 'If this option is enabled then symbols-tree-view is always hidden unless mouse hover over it.'
-    zAutoHideTypes:
-      title: 'AutoHideTypes'
-      type: 'string'
-      description: 'Here you can specify a list of types that will be hidden by default (ex: "variable class")'
-      default: ''
-    sortByNameScopes:
-      type: 'string'
-      description: 'Here you can specify a list of scopes that will be sorted by name (ex: "text.html.php")'
-      default: ''
-
-
-
   symbolsTreeView: null
 
-  activate: (state) ->
-    @symbolsTreeView = new SymbolsTreeView(state.symbolsTreeViewState)
-    atom.commands.add 'atom-workspace', 'symbols-tree-view:toggle': => @symbolsTreeView.toggle()
-    atom.commands.add 'atom-workspace', 'symbols-tree-view:show': => @symbolsTreeView.showView()
-    atom.commands.add 'atom-workspace', 'symbols-tree-view:hide': => @symbolsTreeView.hideView()
+  createView: ->
+    unless @symbolsTreeView?
+      SymbolsTreeView = require './symbols-tree-view'
+      @symbolsTreeView = new SymbolsTreeView(@state)
+    @symbolsTreeView
 
-    atom.config.observe 'tree-view.showOnRightSide', (value) =>
-      if @symbolsTreeView.hasParent()
+  activate: (@state) ->
+    @disposables = new CompositeDisposable
+
+    @disposables.add atom.commands.add('atom-workspace', {
+      'symbols-tree-view:toggle': => @createView().toggle()
+      'symbols-tree-view:show': => @createView().showView()
+      'symbols-tree-view:hide': => @createView().hideView()
+    })
+
+    atom.config.observe 'tree-view.showOnRightSide', =>
+      if @symbolsTreeView? and @symbolsTreeView.hasParent()
         @symbolsTreeView.remove()
         @symbolsTreeView.populate()
         @symbolsTreeView.attach()
 
     atom.config.observe "symbols-tree-view.autoToggle", (enabled) =>
       if enabled
-        @symbolsTreeView.toggle() unless @symbolsTreeView.hasParent()
+        @createView().toggle() unless @symbolsTreeView? and @symbolsTreeView.hasParent()
       else
-        @symbolsTreeView.toggle() if @symbolsTreeView.hasParent()
+        @symbolsTreeView.toggle() if @symbolsTreeView? and @symbolsTreeView.hasParent()
 
   deactivate: ->
-    @symbolsTreeView.destroy()
+    @disposables.dispose()
+    @symbolsTreeView?.destroy()
+    @symbolsTreeView = null
 
   serialize: ->
-    symbolsTreeViewState: @symbolsTreeView.serialize()
+    symbolsTreeViewState: @symbolsTreeView?.serialize() ? @state.symbolsTreeViewState
 
   getProvider: ->
-    view = @symbolsTreeView
     { getSuggestionForWord: (textEditor, text, range) =>
       {
         range: range
-        callback: ()=>
-          view.focusClickedTag.bind(view)(textEditor, text)
+        callback: () =>
+          symbolsTreeview = @createView()
+          symbolsTreeview.focusClickedTag.bind(symbolsTreeview)(textEditor, text)
       }
     }
