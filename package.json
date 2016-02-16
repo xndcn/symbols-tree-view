@@ -20,6 +20,34 @@
     "event-kit": "latest",
     "q": "~1.0.1"
   },
+  "configSchema": {
+    "autoToggle": {
+      "type": "boolean",
+      "default": false,
+      "description": "If this option is enabled then symbols-tree-view will auto open when you open files."
+    },
+    "scrollAnimation": {
+      "type": "boolean",
+      "default": true,
+      "description": "If this option is enabled then when you click the item in symbols-tree it will scroll to the destination gradually."
+    },
+    "autoHide": {
+      "type": "boolean",
+      "default": false,
+      "description": "If this option is enabled then symbols-tree-view is always hidden unless mouse hover over it."
+    },
+    "zAutoHideTypes": {
+      "title": "AutoHideTypes",
+      "type": "string",
+      "description": "Here you can specify a list of types that will be hidden by default (ex: 'variable class')",
+      "default": ""
+    },
+    "sortByNameScopes": {
+      "type": "string",
+      "description": "Here you can specify a list of scopes that will be sorted by name (ex: 'text.html.php')",
+      "default": ""
+    }
+  },
   "keywords": [
     "taglist",
     "tagbar",
