@@ -54,10 +54,9 @@ module.exports =
 
   getProvider: ->
     view = @symbolsTreeView
-    { getSuggestionForWord: (textEditor, text, range) =>
-      {
-        range: range
-        callback: ()=>
-          view.focusClickedTag.bind(view)(textEditor, text)
-      }
-    }
+
+    providerName: 'symbols-tree-view'
+    getSuggestionForWord: (textEditor, text, range) =>
+      range: range
+      callback: ()=>
+        view.focusClickedTag.bind(view)(textEditor, text)
