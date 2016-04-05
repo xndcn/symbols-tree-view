@@ -78,16 +78,26 @@
 
 
 --regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*\{/\5/,object/
---regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*\[/\5/,array/
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*(\[|(new[ \t]+)?Array\()/\5/,array/
 --regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*[^"]'[^']*/\5/,string/
 --regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*(true|false)/\5/,boolean/
 --regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*[0-9]+/\5/,number/
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*null/\5/,null/
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|const|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*undefined/\5/,undefined/
+
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*[^tfn0-9"'{\[]+([,;=]|$)/\5/,unknown/
 
 --regex-JavaScript=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*=[ \t]*.+([,;=]|$)/\5/,variable/
---regex-JavaScript=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*[ \t]*([,;]|$)/\5/,variable/
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]*\.)+))[ \t]*([A-Za-z_$][A-Za-z0-9_$.]*)[ \t]*[ \t]*([,;]|$)/\5/,undefined/
 --regex-JavaScript=/(,|(;|^)[ \t]*)const[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*=[ \t]*.+([,;=]|$)/\3/,constant/
 
---regex-JavaScript=/function[ \t]+([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*\([^)]*\)/\1/,function/
+
+--regex-JavaScript=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]*\.)*))[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*=[ \t]*function[ \t]*\(/\5/,function-expression/
+--regex-JavaScript=/(,|(;|^))[ \t]*(([A-Za-z_$][A-Za-z0-9_$.]*\.)+prototype\.)[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*=[ \t]*function[ \t]*\(/\4\5/,prototype-method/
+--regex-JavaScript=/(,|^|\*\/)[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*:[ \t]*function[ \t]*\(/\2/,object-method/
+
+
+--regex-JavaScript=/function[ \t]+([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*\([^)]*\)/\1/,function-declaration/
 
 --regex-JavaScript=/(,|^|\*\/)[ \t]*(while|if|for|switch|function|([A-Za-z_$][A-Za-z0-9_$]*))[ \t]*\([^)]*\)[ \t]*\{/\3/,function/
 
