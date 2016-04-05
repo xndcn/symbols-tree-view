@@ -23,7 +23,10 @@ module.exports =
       type: 'string'
       description: 'Here you can specify a list of scopes that will be sorted by name (ex: "text.html.php")'
       default: ''
-
+    defaultWidth:
+      type: 'number'
+      description: 'Width of the panel (needs Atom restart)'
+      default: 200
 
 
   symbolsTreeView: null

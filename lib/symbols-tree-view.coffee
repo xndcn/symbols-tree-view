@@ -45,7 +45,7 @@ module.exports =
         @animationDuration = if enabled then 300 else 0
 
       @minimalWidth = 5
-      @originalWidth = 200
+      @originalWidth = atom.config.get('symbols-tree-view.defaultWidth')
       atom.config.observe 'symbols-tree-view.autoHide', (autoHide) =>
         unless autoHide
           @width(@originalWidth)
