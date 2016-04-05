@@ -114,6 +114,7 @@ module.exports =
         @sortByNameScopes = atom.config.get('symbols-tree-view.sortByNameScopes')
         if @sortByNameScopes.indexOf(@getScopeName()) != -1
           @cachedStatus[editor].nowSortStatus[0] = true
+          @treeView.sortByName()
         {@nowTypeStatus, @nowSortStatus} = @cachedStatus[editor]
 
       @contextMenu.addMenu(type, @nowTypeStatus[type], toggleTypeVisible) for type in types
