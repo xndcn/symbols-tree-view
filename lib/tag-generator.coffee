@@ -60,7 +60,7 @@ module.exports =
     generate: ->
       deferred = Q.defer()
       tags = []
-      command = path.resolve(__dirname, '..', 'vendor', "ctags-#{process.platform}")
+      command = path.resolve(__dirname, '..', 'vendor', "universal-ctags-#{process.platform}")
       defaultCtagsFile = require.resolve('./.ctags')
       args = ["--options=#{defaultCtagsFile}", '--fields=KsS']
 
