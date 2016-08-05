@@ -51,6 +51,9 @@ module.exports =
         'text.html'             : 'Html'
         'text.html.php'         : 'Php'
         'source.livecodescript' : 'LiveCode'
+        'source.scilab'         : 'Scilab' # Scilab
+        'source.matlab'         : 'Scilab' # Matlab
+        'source.octave'         : 'Scilab' # GNU Octave
 
         # For backward-compatibility with Atom versions < 0.166
         'source.c++'            : 'C++'
