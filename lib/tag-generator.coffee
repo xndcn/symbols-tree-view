@@ -15,8 +15,8 @@ module.exports =
           type: sections[3]
           parent: null
         }
-        if sections.length > 4 and sections[4].search('signature:') == -1
-          tag.parent = sections[4]
+        if sections.length > 3 and sections[3].search('signature:') == -1
+          tag.parent = sections[3]
         if @getLanguage() == 'Python' and tag.type == 'member'
           tag.type = 'function'
         return tag
