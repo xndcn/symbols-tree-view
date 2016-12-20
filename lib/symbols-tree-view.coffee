@@ -72,7 +72,7 @@ module.exports =
             @focusCurrentCursorTag()
 
     focusCurrentCursorTag: ->
-      if editor = @getEditor()
+      if (editor = @getEditor()) and @parser?
         row = editor.getCursorBufferPosition().row
         tag = @parser.getNearestTag(row)
         @treeView.select(tag)
