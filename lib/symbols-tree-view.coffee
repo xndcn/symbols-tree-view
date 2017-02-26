@@ -17,6 +17,7 @@ module.exports =
       @cachedStatus = {}
       @contextMenu = new SymbolsContextMenu
       @autoHideTypes = atom.config.get('symbols-tree-view.zAutoHideTypes')
+      @autoCollapseTypes = atom.config.get('symbols-tree-view.zAutoCollapseTypes')
 
       @treeView.onSelect ({node, item}) =>
         if item.position.row >= 0 and editor = atom.workspace.getActiveTextEditor()
@@ -135,6 +136,11 @@ module.exports =
               @treeView.toggleTypeVisible(type)
               @contextMenu.toggle(type)
 
+        if (@autoCollapseTypes)
+          for type in types
+            if(@autoCollapseTypes.indexOf(type) != -1
+               and @autoHideTypes.indexOf(type) == -1)
+              @treeView.setCollapsed(type)
 
     # Returns an object that can be retrieved when package is activated
     serialize: ->

@@ -106,6 +106,11 @@ module.exports =
         if item.type == type
           item.view.toggle()
 
+    setCollapsed: (type) =>
+      @traversal @rootNode, (item) =>
+        if item.type == type
+          item.view.setCollapsed()
+
     sortByName: (ascending=true) =>
       @traversal @rootNode, (item) =>
         item.children?.sort (a, b) =>
