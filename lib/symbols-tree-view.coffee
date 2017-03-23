@@ -25,10 +25,10 @@ module.exports =
           {top, left, height, width} = editor.pixelRectForScreenRange(screenRange)
           bottom = top + height
           desiredScrollCenter = top + height / 2
-          unless editor.getScrollTop() < desiredScrollCenter < editor.getScrollBottom()
+          unless editor.element.getScrollTop() < desiredScrollCenter < editor.element.getScrollBottom()
             desiredScrollTop =  desiredScrollCenter - editor.getHeight() / 2
 
-          from = {top: editor.getScrollTop()}
+          from = {top: editor.element.getScrollTop()}
           to = {top: desiredScrollTop}
 
           step = (now) ->
