@@ -19,6 +19,11 @@ module.exports =
       type: 'string'
       description: 'Here you can specify a list of types that will be hidden by default (ex: "variable class")'
       default: ''
+    autoSortByName:
+      title: 'Automatically sort by name'
+      type: 'boolean'
+      default: false
+      description: 'If this option is enabled then symbols will be sorted by name by default'
     sortByNameScopes:
       type: 'string'
       description: 'Here you can specify a list of scopes that will be sorted by name (ex: "text.html.php")'
