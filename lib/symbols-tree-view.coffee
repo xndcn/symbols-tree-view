@@ -131,7 +131,7 @@ module.exports =
 
         if (@autoHideTypes)
           for type in types
-            if(@autoHideTypes.indexOf(type) != -1)
+            if(type && @autoHideTypes.indexOf(type) != -1)
               @treeView.toggleTypeVisible(type)
               @contextMenu.toggle(type)
 
