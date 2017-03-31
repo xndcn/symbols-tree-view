@@ -97,7 +97,7 @@
 --regex-JavaScript=/(,|^|\*\/)[ \t]*([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*:[ \t]*function[ \t]*\(/\2/,object-method/
 
 
---regex-JavaScript=/function[ \t]+([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*\([^)]*\)/\1/,function-declaration/
+--regex-JavaScript=/function\*?[ \t]+([A-Za-z_$][A-Za-z0-9_$]*)[ \t]*\([^)]*\)/\1/,function-declaration/
 
 --regex-JavaScript=/(,|^|\*\/)[ \t]*(while|if|for|switch|function|([A-Za-z_$][A-Za-z0-9_$]*))[ \t]*\([^)]*\)[ \t]*\{/\3/,function/
 
