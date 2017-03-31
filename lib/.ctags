@@ -35,7 +35,8 @@
 --langmap=Markdown:+.mkd
 --langmap=Markdown:+.mkdown
 --langmap=Markdown:+.ron
---regex-Markdown=/^#+[ \t]*([^#]+)/\1/f,function/
+--regex-Markdown=/^#+[ \t]*([^#]+)/\1/m,macro/
+--regex-Markdown=/^[ \t]*([-\*])[ \t]+(.*)/\2/e,enum/
 
 --langdef=Json
 --langmap=Json:.json
