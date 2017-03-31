@@ -180,3 +180,7 @@
 --langmap=Scilab:+.kla
 --regex-Scilab=#(^///[ \t]*\$begin[ \t])+ScriptHeader#Script-Header#s,package#i
 --regex-Scilab=#^[ \t]*function.*[ \t]]*([a-zA-Z_][a-zA-Z0-9_]*)\(#\1#q,function#
+
+--langdef=ini
+--langmap=ini:.ini
+--regex-ini=/^[ \t]*(\[.+\])[ \t]*$/\1/t,generics/
