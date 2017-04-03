@@ -41,17 +41,17 @@ module.exports =
     atom.commands.add 'atom-workspace', 'symbols-tree-view:show': => @symbolsTreeView.showView()
     atom.commands.add 'atom-workspace', 'symbols-tree-view:hide': => @symbolsTreeView.hideView()
 
-    atom.config.observe 'tree-view.showOnRightSide', (value) =>
-      if @symbolsTreeView.hasParent()
-        @symbolsTreeView.remove()
-        @symbolsTreeView.populate()
-        @symbolsTreeView.attach()
-
     atom.config.observe "symbols-tree-view.autoToggle", (enabled) =>
       if enabled
         @symbolsTreeView.toggle() unless @symbolsTreeView.hasParent()
       else
         @symbolsTreeView.toggle() if @symbolsTreeView.hasParent()
+
+    atom.config.observe 'tree-view.showOnRightSide', (value) =>
+      @symbolsTreeView.updatePane()
+
+    atom.config.observe 'symbols-tree-view.showOnRightSide', (value) =>
+      @symbolsTreeView.updatePane()
 
   deactivate: ->
     @symbolsTreeView.destroy()
