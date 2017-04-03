@@ -121,6 +121,12 @@ module.exports =
       @contextMenu.addSeparator()
       @contextMenu.addMenu('sort by name', @nowSortStatus[0], toggleSortByName)
 
+    updatePane : ->
+      if @hasParent()
+        @remove()
+        @populate()
+        @attach()
+
     generateTags: (filePath) ->
       new TagGenerator(filePath, @getScopeName()).generate().done (tags) =>
         @parser = new TagParser(tags, @getScopeName())

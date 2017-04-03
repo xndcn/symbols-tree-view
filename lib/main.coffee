@@ -6,6 +6,10 @@ module.exports =
       type: 'boolean'
       default: false
       description: 'If this option is enabled then symbols-tree-view will auto open when you open files.'
+    showOnRightSide:
+      type: 'boolean'
+      default: false
+      description: 'If this option is enabled then symbols-tree-view will show up on the right hand side. Otherwise, the default tree-view setting is used.'
     scrollAnimation:
       type: 'boolean'
       default: true
