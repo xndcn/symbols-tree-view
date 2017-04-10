@@ -24,7 +24,7 @@ module.exports =
         return null
 
     getLanguage: ->
-      return 'Cson' if path.extname(@path) in ['.cson', '.gyp']
+      return 'Cson' if (@path && path.extname(@path) in ['.cson', '.gyp'])
 
       {
         'source.c'              : 'C'
