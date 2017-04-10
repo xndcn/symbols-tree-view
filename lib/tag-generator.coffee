@@ -51,6 +51,9 @@ module.exports =
         'text.html'             : 'Html'
         'text.html.php'         : 'Php'
         'source.livecodescript' : 'LiveCode'
+        'source.scilab'         : 'Scilab' # Scilab
+        'source.matlab'         : 'Scilab' # Matlab
+        'source.octave'         : 'Scilab' # GNU Octave
 
         # For backward-compatibility with Atom versions < 0.166
         'source.c++'            : 'C++'
@@ -60,7 +63,7 @@ module.exports =
     generate: ->
       deferred = Q.defer()
       tags = []
-      command = path.resolve(__dirname, '..', 'vendor', "ctags-#{process.platform}")
+      command = path.resolve(__dirname, '..', 'vendor', "universal-ctags-#{process.platform}")
       defaultCtagsFile = require.resolve('./.ctags')
       args = ["--options=#{defaultCtagsFile}", '--fields=KsS']
 

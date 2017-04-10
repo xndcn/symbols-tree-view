@@ -22,17 +22,17 @@ module.exports =
         if item.position.row >= 0 and editor = atom.workspace.getActiveTextEditor()
           screenPosition = editor.screenPositionForBufferPosition(item.position)
           screenRange = new Range(screenPosition, screenPosition)
-          {top, left, height, width} = editor.pixelRectForScreenRange(screenRange)
+          {top, left, height, width} = editor.element.pixelRectForScreenRange(screenRange)
           bottom = top + height
           desiredScrollCenter = top + height / 2
-          unless editor.getScrollTop() < desiredScrollCenter < editor.getScrollBottom()
-            desiredScrollTop =  desiredScrollCenter - editor.getHeight() / 2
+          unless editor.element.getScrollTop() < desiredScrollCenter < editor.element.getScrollBottom()
+            desiredScrollTop =  desiredScrollCenter - editor.element.getHeight() / 2
 
-          from = {top: editor.getScrollTop()}
+          from = {top: editor.element.getScrollTop()}
           to = {top: desiredScrollTop}
 
           step = (now) ->
-            editor.setScrollTop(now)
+            editor.element.setScrollTop(now)
 
           done = ->
             editor.scrollToBufferPosition(item.position, center: true)
@@ -45,7 +45,7 @@ module.exports =
         @animationDuration = if enabled then 300 else 0
 
       @minimalWidth = 5
-      @originalWidth = 200
+      @originalWidth = atom.config.get('symbols-tree-view.defaultWidth')
       atom.config.observe 'symbols-tree-view.autoHide', (autoHide) =>
         unless autoHide
           @width(@originalWidth)
@@ -72,7 +72,7 @@ module.exports =
             @focusCurrentCursorTag()
 
     focusCurrentCursorTag: ->
-      if editor = @getEditor()
+      if (editor = @getEditor()) and @parser?
         row = editor.getCursorBufferPosition().row
         tag = @parser.getNearestTag(row)
         @treeView.select(tag)
@@ -111,6 +111,10 @@ module.exports =
       else
         @cachedStatus[editor] = {nowTypeStatus: {}, nowSortStatus: [false]}
         @cachedStatus[editor].nowTypeStatus[type] = true for type in types
+        @sortByNameScopes = atom.config.get('symbols-tree-view.sortByNameScopes')
+        if @sortByNameScopes.indexOf(@getScopeName()) != -1
+          @cachedStatus[editor].nowSortStatus[0] = true
+          @treeView.sortByName()
         {@nowTypeStatus, @nowSortStatus} = @cachedStatus[editor]
 
       @contextMenu.addMenu(type, @nowTypeStatus[type], toggleTypeVisible) for type in types
