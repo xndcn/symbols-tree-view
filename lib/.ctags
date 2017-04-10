@@ -155,6 +155,7 @@
 --regex-LiveCode=/^[ \t]*(global|local)[ \t]+([A-Za-z0-9_]+)/\2/v,variable/
 
 --langdef=sql
+--sql-kinds=+dr
 --langmap=sql:.sql
 --langmap=sql:+.bdy
 --langmap=sql:+.spc
