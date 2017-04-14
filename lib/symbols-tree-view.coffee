@@ -23,17 +23,17 @@ module.exports =
         if item.position.row >= 0 and editor = atom.workspace.getActiveTextEditor()
           screenPosition = editor.screenPositionForBufferPosition(item.position)
           screenRange = new Range(screenPosition, screenPosition)
-          {top, left, height, width} = editor.pixelRectForScreenRange(screenRange)
+          {top, left, height, width} = editor.element.pixelRectForScreenRange(screenRange)
           bottom = top + height
           desiredScrollCenter = top + height / 2
-          unless editor.getScrollTop() < desiredScrollCenter < editor.getScrollBottom()
-            desiredScrollTop =  desiredScrollCenter - editor.getHeight() / 2
+          unless editor.element.getScrollTop() < desiredScrollCenter < editor.element.getScrollBottom()
+            desiredScrollTop =  desiredScrollCenter - editor.element.getHeight() / 2
 
-          from = {top: editor.getScrollTop()}
+          from = {top: editor.element.getScrollTop()}
           to = {top: desiredScrollTop}
 
           step = (now) ->
-            editor.setScrollTop(now)
+            editor.element.setScrollTop(now)
 
           done = ->
             editor.scrollToBufferPosition(item.position, center: true)
