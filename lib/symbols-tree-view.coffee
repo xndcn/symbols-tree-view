@@ -79,7 +79,7 @@ module.exports =
 
     focusClickedTag: (editor, text) ->
       console.log "clicked: #{text}"
-      if editor = @getEditor()
+      if @parser && editor = @getEditor()
         tag =  (t for t in @parser.tags when t.name is text)[0]
         @treeView.select(tag)
         # imho, its a bad idea =(
