@@ -59,6 +59,26 @@ module.exports =
               parents[now].parent = pre
               parents[now].name = @splitNameTag(parents[now].name)
 
+    buildMarkdownParents: (parents) ->
+      # identify the header level if any
+      headerlevel = (x) -> parseInt(x.type.slice(-1), 10)
+      
+      last_hierarchy_level = false;
+      last_hierarchy = [false]
+      
+      for tag in @tags
+        taglevel = headerlevel(tag)
+        if taglevel > 0
+          tag.parent = last_hierarchy[taglevel - 2] if taglevel >= 2 # 'header-1' without parent
+          if taglevel - last_hierarchy_level > 1 # missing hierarchy level in between
+            tag.parent = last_hierarchy.slice(-1)[0]
+            tag.hierarchy_break = true
+          last_hierarchy_level = taglevel
+          last_hierarchy[taglevel-1] = tag.parentKey
+          last_hierarchy = last_hierarchy.slice(0, taglevel) # crop lower levels of hierarchy
+        else # NaN -> table, image
+          tag.parent = last_hierarchy[last_hierarchy_level-1]
+
     parse: ->
       roots = []
       parents = {}
@@ -79,10 +99,15 @@ module.exports =
           key = tag.type + ':' + parent + @splitSymbol + tag.name
         else
           key = tag.type + ':' + tag.name
+          # add row number to avoid issues in markdown documents with repeating heading names
+          key = tag.type + ':' + tag.position.row + ':' + tag.name if @grammar == 'source.gfm' or @grammar == 'text.md'
+          tag.parentKey = key # store for consistency
         parents[key] = tag
 
       # try to build up the missed parent
       @buildMissedParent(parents)
+
+      @buildMarkdownParents() if @grammar == 'source.gfm' or @grammar == 'text.md'
 
       for tag in @tags
         if tag.parent
@@ -96,6 +121,7 @@ module.exports =
       for tag in @tags
         tag.label = tag.name
         tag.icon = "icon-#{tag.type}"
+        tag.icon += " icon-hierarchy-break" if tag.hierarchy_break
         if tag.parent
           parent = parents[tag.parent]
           parent.children ?= []
@@ -104,7 +130,10 @@ module.exports =
           roots.push(tag)
         types[tag.type] = null
 
-      return {root: {label: 'root', icon: null, children: roots}, types: Object.keys(types)}
+      types = Object.keys(types)
+      types = types.sort() if @grammar == 'source.gfm' or @grammar == 'text.md'
+
+      return {root: {label: 'root', icon: null, children: roots}, types: types}
 
     getNearestTag: (row) ->
       left = 0
