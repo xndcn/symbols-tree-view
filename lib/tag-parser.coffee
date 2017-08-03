@@ -121,6 +121,7 @@ module.exports =
       for tag in @tags
         tag.label = tag.name
         tag.icon = "icon-#{tag.type}"
+        tag.icon += " icon-hierarchy-break" if tag.hierarchy_break
         if tag.parent
           parent = parents[tag.parent]
           parent.children ?= []
