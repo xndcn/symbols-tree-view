@@ -35,7 +35,14 @@
 --langmap=Markdown:+.mkd
 --langmap=Markdown:+.mkdown
 --langmap=Markdown:+.ron
---regex-Markdown=/^#+[ \t]*([^#]+)/\1/f,function/
+--regex-Markdown=/^#{1}[ \t]*([^#]+)/\1/a,header-1/
+--regex-Markdown=/^#{2}[ \t]*([^#]+)/\1/b,header-2/
+--regex-Markdown=/^#{3}[ \t]*([^#]+)/\1/c,header-3/
+--regex-Markdown=/^#{4}[ \t]*([^#]+)/\1/d,header-4/
+--regex-Markdown=/^#{5}[ \t]*([^#]+)/\1/e,header-5/
+--regex-Markdown=/^#{6}[ \t]*([^#]+)/\1/f,header-6/
+--regex-Markdown=/!\[(.*)\]\(.*\)/\1/x,image/
+--regex-Markdown=/^[ \t]*Table: (.*)/\1/y,table/
 
 --langdef=Json
 --langmap=Json:.json

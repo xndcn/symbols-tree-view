@@ -59,6 +59,26 @@ module.exports =
               parents[now].parent = pre
               parents[now].name = @splitNameTag(parents[now].name)
 
+    buildMarkdownParents: (parents) ->
+      # identify the header level if any
+      headerlevel = (x) -> parseInt(x.type.slice(-1), 10)
+      
+      last_hierarchy_level = false;
+      last_hierarchy = [false]
+      
+      for tag in @tags
+        taglevel = headerlevel(tag)
+        if taglevel > 0
+          tag.parent = last_hierarchy[taglevel - 2] if taglevel >= 2 # 'header-1' without parent
+          if taglevel - last_hierarchy_level > 1 # missing hierarchy level in between
+            tag.parent = last_hierarchy.slice(-1)[0]
+            tag.hierarchy_break = true
+          last_hierarchy_level = taglevel
+          last_hierarchy[taglevel-1] = tag.parentKey
+          last_hierarchy = last_hierarchy.slice(0, taglevel) # crop lower levels of hierarchy
+        else # NaN -> table, image
+          tag.parent = last_hierarchy[last_hierarchy_level-1]
+
     parse: ->
       roots = []
       parents = {}
@@ -79,10 +99,13 @@ module.exports =
           key = tag.type + ':' + parent + @splitSymbol + tag.name
         else
           key = tag.type + ':' + tag.name
+          tag.parentKey = key # store for consistency
         parents[key] = tag
 
       # try to build up the missed parent
       @buildMissedParent(parents)
+
+      @buildMarkdownParents() if @grammar == 'source.gfm' or @grammar == 'text.md'
 
       for tag in @tags
         if tag.parent
