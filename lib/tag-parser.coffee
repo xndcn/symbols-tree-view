@@ -129,7 +129,10 @@ module.exports =
           roots.push(tag)
         types[tag.type] = null
 
-      return {root: {label: 'root', icon: null, children: roots}, types: Object.keys(types)}
+      types = Object.keys(types)
+      types = types.sort() if @grammar == 'source.gfm' or @grammar == 'text.md'
+
+      return {root: {label: 'root', icon: null, children: roots}, types: types}
 
     getNearestTag: (row) ->
       left = 0
