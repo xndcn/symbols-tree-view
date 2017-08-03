@@ -35,6 +35,7 @@ module.exports =
         'source.css.less'       : 'Css'
         'source.css.scss'       : 'Css'
         'source.gfm'            : 'Markdown'
+        'text.md'               : 'Markdown'
         'source.go'             : 'Go'
         'source.java'           : 'Java'
         'source.js'             : 'JavaScript'
