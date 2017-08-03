@@ -99,6 +99,8 @@ module.exports =
           key = tag.type + ':' + parent + @splitSymbol + tag.name
         else
           key = tag.type + ':' + tag.name
+          # add row number to avoid issues in markdown documents with repeating heading names
+          key = tag.type + ':' + tag.position.row + ':' + tag.name if @grammar == 'source.gfm' or @grammar == 'text.md'
           tag.parentKey = key # store for consistency
         parents[key] = tag
 
